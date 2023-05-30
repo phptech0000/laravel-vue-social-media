@@ -89,12 +89,26 @@
 
         <!-- 
           TIP: #PostSection is the second section i.e. Column 2
+
+          row-span-6 : It spans vertically across 6 rows within a grid or table layout.
+
+          TODO: Revisit "row-span-6" and understand it's role here.
         -->
         <div
           id="PostSection"
           class="row-span-6 max-w-[600px] lg:mx-0 mx-auto overflow-auto"
         >
-          <CreatePostBox image="https://picsum.photos/id/58/300/320" />
+          <CreatePostBox
+            image="https://picsum.photos/id/58/300/320"
+            placeholder="What's on your mind David Mutua"
+          />
+
+          <Post image="https://picsum.photos/id/191/800/800"/>
+          <Post image="https://picsum.photos/id/193/800/800"/>
+          <Post image="https://picsum.photos/id/194/800/800"/>
+          <Post image="https://picsum.photos/id/195/800/800"/>
+          <Post image="https://picsum.photos/id/196/800/800"/>
+          <Post />
         </div>
 
         <!-- 
@@ -312,6 +326,8 @@
 <script setup>
 import MainNavLayout from "@/Layouts/MainNavLayout.vue";
 import { Head, usePage, Link } from "@inertiajs/vue3";
+import CreatePostBox from "@/Components/CreatePostBox.vue";
+import Post from "@/Components/Post.vue";
 
 import Magnify from "vue-material-design-icons/Magnify.vue";
 import TelevisionPlay from "vue-material-design-icons/TelevisionPlay.vue";
