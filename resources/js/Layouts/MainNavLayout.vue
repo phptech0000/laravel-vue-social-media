@@ -40,7 +40,9 @@ let showMenu = ref(false);
       TIP: set width explicitly -->
     <div id="NavLeft" class="flex items-center justify-start w-[260px]">
       <!-- LOGO -->
-      <Link href="/" class="pl-3 min-w-[55px]">FB</Link>
+      <Link href="/" class="pl-3 min-w-[55px]">
+        <img src="/images/icons/FacebookLogoCircle.png" class="w-[40px]" />
+      </Link>
       <!-- Outer div to input section -->
       <div
         class="flex items-center justify-center bg-[#EFF2F5] p-1 rounded-full h-[40px] ml-2"
