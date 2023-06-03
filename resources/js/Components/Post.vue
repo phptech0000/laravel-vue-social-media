@@ -57,6 +57,7 @@ const { post, user, comments, image } = toRefs(props);
     </div>
 
     <img
+      @click="isImageDisplay = image || 'https://picsum.photos/id/190/800/800'"
       :src="image || 'https://picsum.photos/id/190/800/800'"
       class="mx-auto cursor-pointer"
     />
