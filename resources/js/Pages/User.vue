@@ -184,6 +184,7 @@
               <!-- w-1/3: 33% -->
               <span class="w-1/3">
                 <img
+                  @click="isImageDisplay = 'https://picsum.photos/id/78/300/300'"
                   src="https://picsum.photos/id/78/300/300"
                   class="aspect-square object-cover p-1 rounded-lg cursor-pointer"
                 />
