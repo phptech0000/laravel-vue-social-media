@@ -16,6 +16,7 @@ import Logout from "vue-material-design-icons/Logout.vue";
 
 import CropperModal from "@/Components/CropperModal.vue";
 import ImageDisplay from "@/Components/ImageDisplay.vue";
+import CreatePostOverlay from "@/Components/CreatePostOverlay.vue";
 
 // Pinia
 import { useGeneralStore } from "@/stores/general";
@@ -183,6 +184,7 @@ let showMenu = ref(false);
   </div>
   <slot />
 
+  <CreatePostOverlay v-if="isPostOverlay" @showModal="isPostOverlay = false" />
   <CropperModal v-if="isCropperModal" @showModal="isCropperModal = false" />
-  <ImageDisplay v-if="isImageDisplay"/>
+  <ImageDisplay v-if="isImageDisplay" />
 </template>
