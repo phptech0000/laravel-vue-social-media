@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
+use App\Services\ImageService;
+use App\Http\Resources\AllPostsCollection;
 
 class PostController extends Controller
 {
@@ -13,54 +15,54 @@ class PostController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Posts');
+        // Get all posts in descending order
+        $posts = Post::orderBy("created_at", 'desc')->get();
+        return Inertia::render('Posts', [
+            'posts' => new AllPostsCollection($posts)
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
-    }
+        // Validation first
+        $request->validate(['text' => 'required']);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Post $post)
-    {
-        //
-    }
+        $post = new Post();
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Post $post)
-    {
-        //
-    }
+        // Since image is optional
+        if ($request->hasFile('image')) {
+            // Check it's type
+            $request->validate(['image' => 'required|mimes:png,jpg,jpeg']);
+            $post = (new ImageService())->updateImage($post, $request);
+        }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Post $post)
-    {
-        //
+        // Update user_id on the Post table
+        $post->user_id = auth()->user()->id;
+
+        // Retrieve a text input from $request
+        $post->text = $request->input('text');
+        $post->save();
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Post $post)
+    public function destroy(int $id)
     {
-        //
+        $post = Post::find($id);
+
+        if (!empty($post->image)) {
+            $currentImage = public_path() . $post->image;
+
+            if (file_exists($currentImage)) {
+                unlink($currentImage);
+            }
+        }
+
+        $post->delete();
     }
 }
