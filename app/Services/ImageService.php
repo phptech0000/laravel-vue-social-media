@@ -6,11 +6,12 @@ namespace App\Services;
 use Image;
 use App\Models\{Post, User};
 use Illuminate\Http\Request;
+use Illuminate\Contracts\Auth\Authenticatable;
 
 
 class ImageService
 {
-    public function updateImage(Post|User $model, Request $request): Post|User
+    public function updateImage(Post|Authenticatable $model, Request $request): Post|Authenticatable
     {
         $image = Image::make($request->file('image'));
 
